@@ -6,6 +6,9 @@ import java.io.InputStreamReader;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.io.DataOutputStream;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Arrays;
 
 public class SocketServer 
 {
@@ -41,17 +44,31 @@ public class SocketServer
         	response = in.readLine();
         	if(response == null) {
         		break;
-        	}
+            }
             System.out.printf("Received message with content: '%s'%n", response); 
             
-            //INICIO DA ALTERACAO PARA O LAB
+            List<String> myList = new ArrayList<String>(Arrays.asList(response.split(" ")));
+            String lastOne = myList.get(myList.size() - 1);
+            myList.remove(myList.size() - 1);
+            response = "";
+            for (String s : myList){
+                response += s + " ";
+            }
+            StringBuilder st = new StringBuilder("");
+            for (int index = 0; index < response.length(); index++) {
+                if(response.charAt(index) != ' ')
+                    st.append((char)(response.charAt(index)+(int)Integer.parseInt(lastOne)));
+                else
+                    st.append(" ");
+            }
+
+            
             DataOutputStream out = new DataOutputStream(clientSocket.getOutputStream());
             // Send text to server as bytes
-            out.writeBytes("textooo");
+            out.writeBytes(st.toString());
             out.writeBytes("\n");
-            System.out.println("Sent text: " + "textooo");
+            System.out.println("Sent text: " + st.toString());
             
-         //FIM DA ALTERACAO PARA O LAB
     	
         }
 

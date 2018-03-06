@@ -41,8 +41,7 @@
                         <argument>localhost</argument>
                         <argument>8000</argument>
                         <argument>test</argument>
-                        <argument>1</argument>
-                        <argument>2</argument>
+                        <argument>test3</argument>
                         <argument>3</argument>
                     </arguments>
                 </configuration>
