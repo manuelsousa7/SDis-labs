@@ -6,5 +6,7 @@
 void currentBoard(char *buffer);
 int play(int row, int column, int player);
 int checkWinner();
+int player1();
+int player2();
 
 #endif

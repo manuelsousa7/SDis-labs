@@ -3,11 +3,16 @@ struct play_args {
     int column;
     int player;
 };
+struct plays{
+    int player1;
+    int player2;
+};
 
 program TTT {
     version V1 {
         string CURRENTBOARD(void)=1;
         int PLAY(play_args)=2;
         int CHECKWINNER(void)=3;
+        plays TEST(void)=4;
     } = 1;
-} = 0x31484740;
+} = 84718;

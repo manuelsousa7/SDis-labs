@@ -23,6 +23,8 @@ void ttt_1(host) char *host;
   play_args play_1_arg;
   int *winner;
   char *checkwinner_1_arg;
+  plays  *result_4;
+	char *test_1_arg;
   clnt = clnt_create(host, TTT, V1, "udp");
 
   /* The main game loop. The game continues for up to 9 turns */
@@ -43,6 +45,16 @@ void ttt_1(host) char *host;
           player, (player == 1) ? 'X' : 'O');
       scanf(" %d", &go);
 
+      if(go==-1){
+        result_4 = test_1((void*)&test_1_arg, clnt);
+	      if (result_4 == (plays *) NULL) {
+		      clnt_perror (clnt, "call failed");
+	      }
+        printf("Moves:\n\nPlayer 0: %d\nPlayer 1: %d\n",result_4->player2,result_4->player1);
+        *play_res = TTT_UNUSED_PLAY_RES;
+        continue;
+      }
+
       if (go == 0) {
         *play_res = TTT_UNUSED_PLAY_RES;
         continue;
@@ -55,8 +67,6 @@ void ttt_1(host) char *host;
       play_1_arg.column = go % 3;
       play_1_arg.player = player;
       play_res = play_1(&play_1_arg, clnt);
-      printf("dfdfdf %d\n\n\n\n", &play_res);
-      printf("asddas %d\n\n\n\n", *play_res);
       if (play_res == NULL) {
         clnt_perror(clnt, "call failed:");
       }
