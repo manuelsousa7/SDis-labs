@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "ttt.h": "c",
+        "ttt_lib.h": "c"
+    }
+}
